@@ -12,7 +12,6 @@ class LoginResponseModel {
     );
   }
 }
-
 class LoginRequestModel {
   final String email;
   final String password;

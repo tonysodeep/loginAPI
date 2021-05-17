@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/src/blocs/login_bloc.dart';
+import 'package:login_bloc/src/models/login_model.dart';
 import '../blocs/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of(context);
-    
+
     return Container(
       margin: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -20,6 +21,7 @@ class LoginScreen extends StatelessWidget {
             margin: EdgeInsets.only(top: 25),
           ),
           submitButton(bloc),
+          sampleContainer(bloc),
         ],
       ),
     );
@@ -70,6 +72,18 @@ class LoginScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget sampleContainer(LoginBloc bloc) {
+    return StreamBuilder<LoginResponseModel>(
+      builder: (context, AsyncSnapshot<LoginResponseModel> snapshot) {
+        if (snapshot.hasData) {
+          return Text('${snapshot.data.token} and ${snapshot.data.error}');
+        } else
+          return Text('no data ');
+      },
+      stream: bloc.authValidation,
     );
   }
 }
