@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:login_bloc/src/blocs/login_bloc.dart';
 import 'package:login_bloc/src/blocs/provider.dart';
 import 'package:login_bloc/src/colors/constants.dart';
-
+import 'package:login_bloc/src/models/login_model.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -27,18 +28,25 @@ class RoundedButton extends StatelessWidget {
           builder: (context, snapshot) {
             return TextButton(
               style: TextButton.styleFrom(
-               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-               backgroundColor: color,
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                backgroundColor: color,
               ),
-              onPressed: snapshot.hasData ? bloc.submit : null,
+              onPressed: () {
+                if (snapshot.hasData) {
+                  bloc.submit();
+                } else
+                  return null;
+              },
               child: Text(
                 text,
                 style: TextStyle(color: textColor),
               ),
             );
-          }
+          },
         ),
       ),
     );
   }
+
+  
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login_bloc/src/blocs/login_bloc.dart';
 import 'package:login_bloc/src/blocs/provider.dart';
-import 'package:login_bloc/src/colors/constants.dart';
 import 'package:login_bloc/src/models/login_model.dart';
 import 'package:login_bloc/src/screens/login/round_button.dart';
 import 'package:login_bloc/src/screens/login/round_email_field.dart';
@@ -14,6 +14,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final bloc = Provider.of(context);
     return Background(
       child: SingleChildScrollView(
         child: Column(
@@ -40,19 +41,37 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: 'LOGIN',
             ),
-            sampleContainer(Provider.of(context))
+            sampleContainer(bloc),
           ],
         ),
       ),
     );
   }
-   Widget sampleContainer(LoginBloc bloc) {
+
+  //sample code
+  Widget sampleContainer(LoginBloc bloc) {
     return StreamBuilder<LoginResponseModel>(
       builder: (context, AsyncSnapshot<LoginResponseModel> snapshot) {
-        if (snapshot.hasData) {
-          return Text('${snapshot.data.token} and ${snapshot.data.error}');
-        } else
+        if (!snapshot.hasData) {
           return Text('no data ');
+        } else if (snapshot.data.error.isEmpty) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushNamed(context, "/home");
+          });
+          return Container();
+        } else {
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) {
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text('Error'),
+                ),
+              );
+            },
+          );
+          return Container();
+        }
       },
       stream: bloc.authValidation,
     );

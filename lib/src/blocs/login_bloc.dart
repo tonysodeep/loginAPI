@@ -57,8 +57,10 @@ class LoginBloc with Validators {
       email: _emailController.value,
       password: _passwordController.value,
     );
+
     print(requestModel.email);
     final response = await _repository.login(requestModel);
+    response.isClicked = true;
     _authController.sink.add(response);
   }
 

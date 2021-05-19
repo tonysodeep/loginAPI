@@ -20,6 +20,7 @@ class RoundedEmailField extends StatelessWidget {
         stream: bloc.email,
         builder: (context, snapshot) {
           return TextField(
+            key: Key('emailField'),
             cursorColor: kPrimaryColor,
             onChanged: bloc.changeEmail,
             decoration: InputDecoration(

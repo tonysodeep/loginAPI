@@ -1,9 +1,11 @@
 class LoginResponseModel {
   final String token;
   final String error;
+  bool isClicked;
   LoginResponseModel({
     this.token,
     this.error,
+    this.isClicked = false,
   });
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
@@ -12,6 +14,7 @@ class LoginResponseModel {
     );
   }
 }
+
 class LoginRequestModel {
   final String email;
   final String password;

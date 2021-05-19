@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_bloc/src/screens/home/home_screen.dart';
 
 import 'package:login_bloc/src/screens/login/login_screen.dart';
 import 'blocs/provider.dart';
@@ -9,7 +10,10 @@ class App extends StatelessWidget {
     return Provider(
       child: MaterialApp(
         title: 'Log me in',
-        home: LoginScreen1(),
+        routes: {
+          '/': (_) => LoginScreen(),
+          '/home': (_) => HomeScreen(),
+        },
       ),
     );
   }

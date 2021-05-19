@@ -1,12 +1,11 @@
-
-import 'body.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body(),
+      appBar: AppBar(title: Text('home'),),
+      
     );
   }
 }
