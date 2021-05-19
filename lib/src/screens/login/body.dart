@@ -41,39 +41,9 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: 'LOGIN',
             ),
-            sampleContainer(bloc),
           ],
         ),
       ),
-    );
-  }
-
-  //sample code
-  Widget sampleContainer(LoginBloc bloc) {
-    return StreamBuilder<LoginResponseModel>(
-      builder: (context, AsyncSnapshot<LoginResponseModel> snapshot) {
-        if (!snapshot.hasData) {
-          return Text('no data ');
-        } else if (snapshot.data.error.isEmpty) {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            Navigator.pushNamed(context, "/home");
-          });
-          return Container();
-        } else {
-          WidgetsBinding.instance.addPostFrameCallback(
-            (_) {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.green,
-                  content: Text('Error'),
-                ),
-              );
-            },
-          );
-          return Container();
-        }
-      },
-      stream: bloc.authValidation,
     );
   }
 }

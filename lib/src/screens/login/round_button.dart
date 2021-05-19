@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login_bloc/src/blocs/login_bloc.dart';
 import 'package:login_bloc/src/blocs/provider.dart';
 import 'package:login_bloc/src/colors/constants.dart';
-import 'package:login_bloc/src/models/login_model.dart';
+import 'package:login_bloc/src/widgets/loading_page.dart';
+import 'package:overlay_screen/overlay_screen.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -32,10 +32,12 @@ class RoundedButton extends StatelessWidget {
                 backgroundColor: color,
               ),
               onPressed: () {
-                if (snapshot.hasData) {
-                  bloc.submit();
-                } else
-                  return null;
+                bloc.submit();
+                var loadingPage = LoadingPage(context);
+                OverlayScreen().saveScreens({
+                  'loading': loadingPage.abc(context),
+                });
+                OverlayScreen().show(context, identifier: 'loading');
               },
               child: Text(
                 text,
@@ -47,6 +49,4 @@ class RoundedButton extends StatelessWidget {
       ),
     );
   }
-
-  
 }

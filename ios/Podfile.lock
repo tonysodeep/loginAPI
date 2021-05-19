@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - overlay_screen (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - overlay_screen (from `.symlinks/plugins/overlay_screen/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  overlay_screen:
+    :path: ".symlinks/plugins/overlay_screen/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  overlay_screen: 91c448b5e18235ff087d83797e0613fc4a81fca1
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1
