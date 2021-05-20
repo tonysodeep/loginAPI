@@ -19,7 +19,7 @@ void main() {
           );
         },
       );
-      final message = await userApi.login(
+      final message = await userApi.loginApi(
         LoginRequestModel(
           email: 'eve.holt@reqres.in',
           password: 'cityslicka',

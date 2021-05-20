@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:login_bloc/src/models/login_model.dart';
 import 'package:login_bloc/src/models/password_icon_event.dart';
-import 'package:login_bloc/src/resources/login_api_provider.dart';
+import 'package:login_bloc/src/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:login_bloc/src/blocs/validators.dart';
 
@@ -13,7 +13,7 @@ class LoginBloc with Validators {
   final _authController = BehaviorSubject<LoginResponseModel>();
   final _obscureControllerEvent = StreamController<PasswordIconEvent>();
   final _obscureControllerState = BehaviorSubject<bool>.seeded(true);
-  final _repository = LoginAPIProvider();
+  final _repository = Repository();
 
   //Change data
   Stream<String> get email => _emailController.stream.transform(validateEmail);
