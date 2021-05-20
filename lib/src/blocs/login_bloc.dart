@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:login_bloc/src/models/login_model.dart';
-import 'package:login_bloc/src/models/password_icon_event.dart';
+import 'package:login_bloc/src/events/password_icon_event.dart';
 import 'package:login_bloc/src/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:login_bloc/src/blocs/validators.dart';

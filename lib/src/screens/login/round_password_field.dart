@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_bloc/src/blocs/login_bloc.dart';
 import 'package:login_bloc/src/blocs/provider.dart';
 import 'package:login_bloc/src/colors/constants.dart';
-import 'package:login_bloc/src/models/password_icon_event.dart';
+import 'package:login_bloc/src/events/password_icon_event.dart';
 import 'package:login_bloc/src/widgets/text_field_container.dart';
 
 class RoundedPasswordField extends StatelessWidget {

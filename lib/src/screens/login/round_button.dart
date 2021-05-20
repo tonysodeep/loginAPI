@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_bloc/src/blocs/provider.dart';
 import 'package:login_bloc/src/colors/constants.dart';
-import 'package:login_bloc/src/widgets/loading_page.dart';
+import 'package:login_bloc/src/screens/loading_screen.dart/loading_page.dart';
 import 'package:overlay_screen/overlay_screen.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -26,24 +26,38 @@ class RoundedButton extends StatelessWidget {
         child: StreamBuilder<Object>(
           stream: bloc.submitValid,
           builder: (context, snapshot) {
-            return TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                backgroundColor: color,
-              ),
-              onPressed: () {
-                bloc.submit();
-                var loadingPage = LoadingPage(context);
-                OverlayScreen().saveScreens({
-                  'loading': loadingPage.abc(context),
-                });
-                OverlayScreen().show(context, identifier: 'loading');
-              },
-              child: Text(
-                text,
-                style: TextStyle(color: textColor),
-              ),
-            );
+            if (!snapshot.hasData) {
+              return TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  backgroundColor: color,
+                ),
+                onPressed: null,
+                child: Text(
+                  text,
+                  style: TextStyle(color: textColor),
+                ),
+              );
+            } else {
+              return TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  backgroundColor: color,
+                ),
+                onPressed: () {
+                  bloc.submit();
+                  var loadingPage = LoadingPage(context);
+                  OverlayScreen().saveScreens({
+                    'loading': loadingPage.showLoadingScreenLogin(context),
+                  });
+                  OverlayScreen().show(context, identifier: 'loading');
+                },
+                child: Text(
+                  text,
+                  style: TextStyle(color: textColor),
+                ),
+              );
+            }
           },
         ),
       ),
